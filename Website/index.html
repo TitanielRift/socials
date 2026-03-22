@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titaniel Rift | Official Socials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent-cyan: #00e0fe; 
+            --bg-fallback: #050b12;
+            --card-bg: rgba(0, 0, 0, 0.55);
+            --card-border: rgba(0, 224, 254, 0.15);
+            --text-main: #ffffff;
+            --text-secondary: #aaaaaa;
+            --card-hover-bg: rgba(0, 224, 254, 0.08);
+            --card-hover-border: rgba(0, 224, 254, 0.6);
+            --discord-color: #5865F2; 
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-fallback);
+            background-image: url('background.png'); 
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 60px 20px 30px 20px;
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* --- Profil-Bereich --- */
+        .profile-header {
+            margin-bottom: 50px;
+        }
+
+        .profile-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px auto;
+            display: block;
+            box-shadow: 0 0 30px rgba(0, 224, 254, 0.4);
+            border: 4px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .profile-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 224, 254, 0.6);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, #fff 30%, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(0, 224, 254, 0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        /* --- Link-Karten --- */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            text-decoration: none;
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            transition: all 0.25s ease;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            transform: translateY(-4px);
+            background: var(--card-hover-bg);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 224, 254, 0.2);
+        }
+
+        .link-card i {
+            font-size: 1.6rem;
+            margin-right: 20px;
+            width: 35px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .discord-btn i { color: var(--discord-color) !important; filter: none !important; }
+        .discord-btn:hover { border-color: var(--discord-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(88, 101, 242, 0.3); }
+
+        .link-card:not(.discord-btn) i {
+            color: var(--accent-cyan);
+            filter: drop-shadow(0 0 6px rgba(0, 224, 254, 0.6));
+        }
+
+        .link-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .link-card .arrow {
+            margin-left: auto;
+            margin-right: 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .link-card:hover .arrow {
+            transform: translateX(6px);
+            color: white;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 10;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #0f172a;
+            color: #ddd;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 40px rgba(0, 224, 254, 0.2);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: white;
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <div class="profile-header">
+            <img src="https://static.rankone.global/img/avatars/titanielrift-22U6v4IuWhLP6JRK5I36oh_full.jpg" alt="Titaniel Rift Logo" class="profile-logo">
+            <h1>Titaniel Rift</h1>
+            <div class="subtitle">Streamer & Creator</div>
+        </div>
+
+        <div class="links-container">
+            <a href="https://twitch.tv/titanielrift" class="link-card" target="_blank">
+                <i class="fab fa-twitch"></i>
+                Twitch Live Stream
+                <i class="fas fa-chevron-right arrow"></i>
+            </a>
+
+            <a href="https://discord.gg/CmcgGACWww" class="link-card discord-btn" target="_blank">
+                <i class="fab fa-discord"></i>
+                Discord Community
+                <i class="fas fa-chevron-right arrow"></i>
+            </a>
+
+            <a href="https://tiktok.com/@titanielrift" class="link-card" target="_blank">
+                <i class="fab fa-tiktok"></i>
+                TikTok Clips
+                <i class="fas fa-chevron-right arrow"></i>
+            </a>
+
+            <a href="https://youtube.com/@titanielrift" class="link-card" target="_blank">
+                <i class="fab fa-youtube"></i>
+                YouTube VODs
+                <i class="fas fa-chevron-right arrow"></i>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Titaniel Rift | <a id="openImpressum">Impressum</a>
+    </footer>
+
+    <div id="impressumModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeImpressum">&times;</span>
+            <h2>Impressum</h2>
+            <p><strong>Angaben gemäß § 5 DDG:</strong></p>
+            <p>
+                Daniel Herzog<br>
+                c/o Die Currywurst<br>
+Heidstraße 28 <br>
+
+                44649 Herne
+            </p>
+            <p><strong>Kontakt:</strong></p>
+            <p>E-Mail: titanielrift@gmail.com<br>
+Telefon: 02325 77776</p>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("impressumModal");
+        const openBtn = document.getElementById("openImpressum");
+        const closeBtn = document.getElementById("closeImpressum");
+
+        openBtn.onclick = () => modal.classList.add("show");
+        closeBtn.onclick = () => modal.classList.remove("show");
+        window.onclick = (event) => { if (event.target == modal) modal.classList.remove("show"); }
+    </script>
+
+</body>
+</html>
